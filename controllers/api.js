@@ -2,8 +2,6 @@ import axios from "axios";
 
 export const getPosts = async (req, res) => {
   try {
-    // The Authorization header systematically exists at this point.
-    const productHuntToken = req.headers.authorization.split(" ")[1];
 
     // Verification that the parameter 'day' is given.
     if (!req.query.day) {
@@ -27,7 +25,7 @@ export const getPosts = async (req, res) => {
         `https://api.producthunt.com/v1/posts?day=${req.query.day}`,
         {
           headers: {
-            Authorization: "Bearer " + productHuntToken,
+            Authorization: "Bearer " + process.env.API_TOKEN,
           },
         }
       );
@@ -57,8 +55,6 @@ const validateDateFormat = (day) => {
 
 export const getProductCategorie = async (req, res) => {
   try {
-    // The Authorization header systematically exists at this point.
-    const productHuntToken = req.headers.authorization.split(" ")[1];
 
     // ProductHunt request in a trycatch to handle the APi's errors.
     let apiResponse;
@@ -66,7 +62,7 @@ export const getProductCategorie = async (req, res) => {
     try {
       apiResponse = await axios.get(`https://api.producthunt.com/v1/topics`, {
         headers: {
-          Authorization: "Bearer " + productHuntToken,
+          Authorization: "Bearer " + process.env.API_TOKEN,
         },
       });
     } catch (error) {
