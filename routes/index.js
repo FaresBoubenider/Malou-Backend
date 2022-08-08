@@ -5,7 +5,7 @@ var router = express.Router();
 
 //the routes of the application
 
-router.use("/getPosts", auth, getPosts);
-router.use("/getProductCategorie", auth, getProductCategorie )
+router.get("/getPosts", auth, getPosts);
+router.get("/getProductCategorie", auth, getProductCategorie )
 
 export default router;
